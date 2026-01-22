@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Iovanna 💐</title>
+  <style>
+    :root{
+      --bg1:#fff5f8;
+      --bg2:#f3f6ff;
+      --txt:#2a2a2a;
+      --card:#ffffffcc;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--txt);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background: radial-gradient(1200px 800px at 20% 20%, var(--bg2), transparent),
+                  radial-gradient(1200px 800px at 80% 70%, var(--bg1), transparent),
+                  #fff;
+      overflow:hidden;
+    }
+
+    /* Flores flotando */
+    .flowers{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.25;
+      filter: blur(.2px);
+    }
+    .flower{
+      position:absolute;
+      font-size:clamp(22px, 3vw, 46px);
+      animation: float 10s linear infinite;
+    }
+    @keyframes float{
+      from{ transform: translateY(110vh) rotate(0deg); }
+      to  { transform: translateY(-20vh) rotate(360deg); }
+    }
+
+    .card{
+      width:min(680px, 92vw);
+      padding:28px 22px;
+      background:var(--card);
+      border:1px solid #ffffff;
+      border-radius:22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.10);
+      backdrop-filter: blur(10px);
+      text-align:center;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(22px, 4.5vw, 34px);
+      letter-spacing:.3px;
+    }
+    p{
+      margin:0;
+      font-size:clamp(18px, 3.7vw, 24px);
+      line-height:1.35;
+    }
+    .big{
+      display:block;
+      margin-top:14px;
+      font-size:clamp(36px, 8vw, 62px);
+    }
+    .footer{
+      margin-top:18px;
+      font-size:14px;
+      opacity:.75;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- fondo de flores -->
+  <div class="flowers" aria-hidden="true" id="flowers"></div>
+
+  <main class="card">
+    <h1>💐 Para Iovanna 💐</h1>
+    <p>Esta pagina es para recordarle que la amo Iovanna</p>
+    <span class="big">🌷🌸🌹🌼🌻</span>
+    <div class="footer">Con cariño ❤️</div>
+  </main>
+
+  <script>
+    // Genera flores flotando de forma aleatoria
+    const icons = ["🌷","🌸","🌹","🌼","🌻","💐"];
+    const container = document.getElementById("flowers");
+
+    function addFlower(){
+      const el = document.createElement("div");
+      el.className = "flower";
+      el.textContent = icons[Math.floor(Math.random()*icons.length)];
+
+      const left = Math.random()*100;
+      const delay = Math.random()*6;
+      const duration = 8 + Math.random()*10;
+      const size = 18 + Math.random()*34;
+
+      el.style.left = left + "vw";
+      el.style.animationDelay = delay + "s";
+      el.style.animationDuration = duration + "s";
+      el.style.fontSize = size + "px";
+
+      container.appendChild(el);
+
+      // limpieza
+      setTimeout(()=> el.remove(), (duration + delay) * 1000);
+    }
+
+    // crea un flujo constante
+    for(let i=0;i<16;i++) addFlower();
+    setInterval(addFlower, 700);
+  </script>
+</body>
+</html>
